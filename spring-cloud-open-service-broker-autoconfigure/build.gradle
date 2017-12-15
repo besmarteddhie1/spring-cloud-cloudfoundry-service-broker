@@ -16,6 +16,13 @@
 
 description = "Spring Cloud Service Broker Auto-Configuration"
 
+apply plugin: "groovy"
+apply plugin: "spring-cloud-contract"
+
+contracts {
+	packageWithBaseClasses = "org.springframework.cloud.servicebroker.autoconfigure.contractbase"
+}
+
 dependencyManagement {
 	imports {
 		mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
@@ -30,6 +37,7 @@ dependencies {
 	optional("org.springframework.boot:spring-boot-starter-webflux")
 	testCompile project(path: ":spring-cloud-open-service-broker", configuration: "testOutput")
 	testCompile("org.springframework.boot:spring-boot-starter-test")
+	testCompile("org.springframework.cloud:spring-cloud-starter-contract-verifier")
 	testCompile("org.mockito:mockito-core")
 	testCompile("org.hamcrest:hamcrest-library")
 }
